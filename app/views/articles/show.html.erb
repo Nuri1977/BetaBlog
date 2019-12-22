@@ -1,0 +1,13 @@
+<h2 align="center">Title: <%= @naslov.title %></h2>
+<div class="wel col-xs-8 col-xs-offset-2">
+  <h4 class="center"><strong>Description</strong></h4>
+  <hr>
+  <%= @naslov.description %>
+  <hr>
+  <div class="article-actions">
+    <%= link_to "Edit Article ", edit_article_path, class: "btn btn-xs btn-success" %>
+    <%= link_to "Delete Article ", article_path(@naslov), metod: :delete, data: {confirm: "Are you sure to delete?"}, class: "btn btn-xs btn-danger" %>
+    <%= link_to "Back to Articles", articles_path, class: "btn btn-xs btn-primary" %>
+  </div>
+</div>
+  
