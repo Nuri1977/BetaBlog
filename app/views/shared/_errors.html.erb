@@ -4,12 +4,12 @@
       <div class="card card-danger">
         <div class="card-heading">
           <h2 class="card-title">
-            <%= pluralize(@novo.errors.count, "error") %>
+            <%= pluralize(obj.errors.count, "error") %>
             prohibited this article from being saved:
           </h2>
           <div class="card-body">
             <ul>
-              <% @novo.errors.full_messages.each do |msg| %>
+              <% obj.errors.full_messages.each do |msg| %>
               <li><%= msg %></li>
               <% end %>
             </ul>
