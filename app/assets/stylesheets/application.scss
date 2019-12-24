@@ -43,11 +43,16 @@
  .btn-xlarge {
    font-size: 1.7em;
  }
+ 
+ .article-meta-details {
+  border-top: 1px solid #eaeaea;
+  margin-top: 15px;
+ }
 
- .article-actions {
+.article-actions {
    border-top: 1px solid #eaeaea;
    padding-bottom: 30px;
- }
+}
 
  .article-title{
    font-weight: bold;
