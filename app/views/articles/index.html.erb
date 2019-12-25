@@ -1,30 +1,4 @@
 <h1 align="center"> Listing all Articles </h1>
 <hr>
-<% @artikuj.each  do |a| %>
-  <div class="row">
-    <div class="col-xs-8 col-xs-offset-2">
-      <div class="well well-lg">
-        <div class="article-title">
-          <%= link_to a.title, a %>
-        </div>
-        <div class="article-body">
-          <%= truncate(a.description, length: 200) %>
-          <div class="article-meta-details">
-            <small>Created by: <%= a.user.username if a.user %>,
-              <%= time_ago_in_words(a.created_at) %> ago,
-              last updated: <%= time_ago_in_words(a.updated_at) %> ago</small>
-          </div>
-        </div>
-        <div class="article-actions">      
-          <%= link_to "Edit Article ", edit_article_path(a), class: "btn btn-xs btn-success" %>
-          <%= link_to "Delete Article", article_path(a), metod: :delete, data: {confirm: "Are you sure to delete?"}, class: "btn btn-xs btn-danger" %>
-        </div>
-      </div>
-    </div>
-  </div>
-<% end %>
-
-
+<%= render 'article', obj: @artikuj %>
 <hr>
-
-<h3><%= link_to "Add New Article", new_article_path %></h3>
