@@ -1,7 +1,18 @@
 <h2 align="center">Title: <%= @naslov.title %></h2>
 <div class="wel col-xs-8 col-xs-offset-2">
+  <% if @naslov.user %>
+    <ul class="listing">
+      <div class="row center">
+        <div class="col-md-4 offset-4">
+          <li>Created by:</li>
+          <li><%= link_to gravatar_for(@naslov.user), user_path(@naslov.user) %></li>
+          <li class="article-title"><%= link_to @naslov.user.username, user_path(@naslov.user) %></li>
+          <li><small><%= pluralize(@naslov.user.articles.count, "article") if @naslov.user.articles %> </small></li>
+        </div>
+      </div>
+    </ul>
+  <% end %>
   <h4 class="center"><strong>Description</strong></h4>
-  <hr>
   <%= @naslov.description %>
   <hr>
   <div class="article-actions">
