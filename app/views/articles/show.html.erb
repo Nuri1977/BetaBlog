@@ -1,24 +1,25 @@
-<h2 align="center">Title: <%= @naslov.title %></h2>
+<h2 align="center">Title: <%= @article.title %></h2>
 <div class="wel col-xs-8 col-xs-offset-2">
-  <% if @naslov.user %>
+  <% if @article.user %>
     <ul class="listing">
       <div class="row center">
         <div class="col-md-4 offset-4">
           <li>Created by:</li>
-          <li><%= link_to gravatar_for(@naslov.user), user_path(@naslov.user) %></li>
-          <li class="article-title"><%= link_to @naslov.user.username, user_path(@naslov.user) %></li>
-          <li><small><%= pluralize(@naslov.user.articles.count, "article") if @naslov.user.articles %> </small></li>
+          <li><%= link_to gravatar_for(@article.user), user_path(@article.user) %></li>
+          <li class="article-title"><%= link_to @article.user.username, user_path(@article.user) %></li>
+          <li><small><%= pluralize(@article.user.articles.count, "article") if @article.user.articles %> </small></li>
         </div>
       </div>
     </ul>
   <% end %>
   <h4 class="center"><strong>Description</strong></h4>
-  <%= @naslov.description %>
-  <hr>
+  <%= simple_format(@article.description) %>
   <div class="article-actions">
-    <%= link_to "Edit Article ", edit_article_path, class: "btn btn-xs btn-success" %>
-    <%= link_to "Delete Article ", article_path(@naslov), metod: :delete, data: {confirm: "Are you sure to delete?"}, class: "btn btn-xs btn-danger" %>
-    <%= link_to "Back to Articles", articles_path, class: "btn btn-xs btn-primary" %>
+    <% if logged_in? && current_user == @article.user %>
+      <%= link_to "Edit Article ", edit_article_path, class: "btn btn-xs btn-success" %>
+      <%= link_to "Delete Article ", article_path(@article), metod: :delete, data: {confirm: "Are you sure to delete?"}, class: "btn btn-xs btn-danger" %>
+    <% end %>  
+      <%= link_to "Back to Articles", articles_path, class: "btn btn-xs btn-primary" %>
   </div>
 </div>
   

@@ -1,53 +1,62 @@
 class ArticlesController < ApplicationController
+  before_action :set_article, only: [:edit, :update, :show, :destroy]
+  before_action :require_user, except: [:index, :show]
+  before_action :require_same_user, only: [:edit, :update, :destroy]
 
   def index
     @articles=Article.paginate(page: params[:page], per_page: 5)
   end
 
   def show
-    @naslov=Article.find(params[:id])
   end
 
   def new
-    @novo=Article.new ()
+    @article=Article.new ()
   end
 
   def create
-    @novo=Article.new(novo_params)
-    @novo.user = User.first
-    if @novo.save
+    @article=Article.new(novo_params)
+    @article.user = User.find(session[:user_id]) if session[:user_id]
+    if @article.save
       flash[:success] = "Article was successfully created"
-      redirect_to article_path(@novo)
+      redirect_to article_path(@article)
     else
       render 'new'
     end
   end
 
   def edit
-    @novo=Article.find(params[:id])
   end
 
-  def update
-    @novo=Article.find(params[:id])   
-    if @novo.update(novo_params)
+  def update  
+    if @article.update(novo_params)
       flash[:success] = "Article was successfully edited"
-      redirect_to article_path(@novo)
+      redirect_to article_path(@article)
     else
       render 'edit'
     end
   end
 
   def destroy
-    @fshie=Article.find(params[:id])
-    @fshie.destroy
+    @article.destroy
     flash[:notice] = "Article was successfully deleted"
     redirect_to articles_path
   end
 
   private
-  
+  def set_article
+    @article = Article.find(params[:id])
+  end
+
   def novo_params
      params.require(:article).permit(:title, :description)
+  end
+
+  def require_same_user
+    if current_user != @article.user
+      flash[:danger] = "You can only delete your own articles"
+      redirect_to root_path
+    end
   end
 
 end

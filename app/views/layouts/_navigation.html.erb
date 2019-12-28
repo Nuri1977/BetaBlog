@@ -4,39 +4,59 @@
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <%= link_to "Articles", articles_path, class:"nav-link", id:"paths" %>
-
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item dropdown" id="paths">
-        <a class="nav-link dropdown-toggle" id="paths" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <%= link_to "Add Articles", new_article_path, class:"dropdown-item" %>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link " href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <%= link_to "Articles", articles_path, class:"nav-link", id:"paths" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Authors", users_path, class:"nav-link", id:"paths" %>
+        </li>
+          <% if logged_in? %>
+            <li class="nav-item dropdown" id="paths">
+              <a class="nav-link dropdown-toggle" id="paths" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <%= link_to "Add Articles", new_article_path, class:"dropdown-item" %>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </li>
+          <% end %>        
+      </ul>
+    </div>
+    <form class="form-inline  my-2 my-lg-0 ">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
-    <ul class="nav navbar-nav navbar-right ">
-      <li class="nav-item ml-3">
-        <%= link_to 'Log out', logout_path, method: :delete, id:"paths" %>
-      </li>
-    </ul>
+    <% if logged_in? %>
+      <ul class="nav navbar-nav navbar-right ">
+        <li class="nav-item dropdown" id="paths">
+          <a class="nav-link dropdown-toggle" id="paths" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Your Profile</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <%= link_to "Edit you prifle", edit_user_path(current_user), class:"dropdown-item" %>
+            <%= link_to "View your profile",user_path(current_user), class:"dropdown-item" %>
+          </div>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right ">
+        <li class="nav-item ml-3">
+          <%= link_to 'Log out', logout_path, method: :delete, id:"paths" %>
+        </li>
+      </ul>
+    <% else %>
+      <ul class="nav navbar-nav navbar-right ">
+        <li class="nav-item ml-3">
+          <%= link_to 'Log in', login_path, id:"paths" %>
+        </li>
+      </ul>
+            <ul class="nav navbar-nav navbar-right ">
+        <li class="nav-item ml-3">
+          <%= link_to 'Sign up', signup_path, id:"paths" %>
+        </li>
+      </ul>
+    <% end %>
   </div>
 </nav>
