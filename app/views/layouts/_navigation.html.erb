@@ -34,7 +34,7 @@
     <% if logged_in? %>
       <ul class="nav navbar-nav navbar-right ">
         <li class="nav-item dropdown" id="paths">
-          <a class="nav-link dropdown-toggle" id="paths" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Your Profile</a>
+          <a class="nav-link dropdown-toggle" id="paths" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Your Profile<%= " Admin" if current_user.admin? %></a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <%= link_to "Edit you prifle", edit_user_path(current_user), class:"dropdown-item" %>
             <%= link_to "View your profile",user_path(current_user), class:"dropdown-item" %>

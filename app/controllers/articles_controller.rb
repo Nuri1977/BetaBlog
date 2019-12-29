@@ -7,8 +7,7 @@ class ArticlesController < ApplicationController
     @articles=Article.paginate(page: params[:page], per_page: 5)
   end
 
-  def show
-  end
+
 
   def new
     @article=Article.new ()
@@ -37,6 +36,9 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def show
+  end
+
   def destroy
     @article.destroy
     flash[:notice] = "Article was successfully deleted"
@@ -53,7 +55,7 @@ class ArticlesController < ApplicationController
   end
 
   def require_same_user
-    if current_user != @article.user
+    if current_user != @article.user and !current_user.admin?
       flash[:danger] = "You can only delete your own articles"
       redirect_to root_path
     end
