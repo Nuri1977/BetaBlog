@@ -1,0 +1,19 @@
+<h1 class="text-center">All Categories</h1>
+<div align="center">
+  <div class="col-3 center mt-4">
+  <%= will_paginate(@things, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer, class: 'justify-content-center') %>
+  </div>
+  <% @categories.each do |c| %>
+    <ul class="listing">
+      <div class="row">
+        <div class="well col-md-4 offset-4">
+          <li class="article-title"><%= link_to c.name, category_path(c) %></li>
+        </div>
+      </div>
+    </ul>
+  <% end %>
+  <div class="col-3 center mt-4">
+  <%= will_paginate(@things, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer, class: 'justify-content-center') %>
+  </div>
+</div>
+
