@@ -6,7 +6,7 @@
           <%= link_to a.title, a %>
         </div>
         <div class="article-body">
-          <%= truncate(a.description, length: 200) %>
+          <%= truncate(a.description, length: 500) %>
           <div class="article-meta-details">
             <small>Created by: <%= a.user.username if a.user %>,
               <%= time_ago_in_words(a.created_at) %> ago,

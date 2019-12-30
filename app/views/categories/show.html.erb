@@ -1,5 +1,9 @@
 <h1 align="center"> <%= "Category:" +@category.name %></h1>
-
+  <% if logged_in? and current_user.admin? %>
+  <div class="center">
+    <span class="badge"><%= link_to "Edit Category Name", edit_category_path(@category) %></span>
+  </div>
+  <% end %>
   <div class=" col-3 offset-4 center mt-4">
     <%= will_paginate(@category_articles, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer, class: 'justify-content-center') %>
   </div>
