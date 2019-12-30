@@ -38,37 +38,38 @@
             </li>
           <% end %>        
       </ul>
+
+      <form class="form-inline  my-2 my-lg-0 ">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+      <% if logged_in? %>
+        <ul class="nav navbar-nav navbar-right ">
+          <li class="nav-item dropdown" id="paths">
+            <a class="nav-link dropdown-toggle" id="paths" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Your Profile<%= " Admin" if current_user.admin? %></a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <%= link_to "Edit you prifle", edit_user_path(current_user), class:"dropdown-item" %>
+              <%= link_to "View your profile",user_path(current_user), class:"dropdown-item" %>
+            </div>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right ">
+          <li class="nav-item ml-3">
+            <%= link_to 'Log out', logout_path, method: :delete, id:"paths" %>
+          </li>
+        </ul>
+      <% else %>
+        <ul class="nav navbar-nav navbar-right ">
+          <li class="nav-item ml-3">
+            <%= link_to 'Log in', login_path, id:"paths" %>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right ">
+          <li class="nav-item ml-3">
+            <%= link_to 'Sign up', signup_path, id:"paths" %>
+          </li>
+        </ul>
+      <% end %>
     </div>
-    <form class="form-inline  my-2 my-lg-0 ">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-    <% if logged_in? %>
-      <ul class="nav navbar-nav navbar-right ">
-        <li class="nav-item dropdown" id="paths">
-          <a class="nav-link dropdown-toggle" id="paths" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Your Profile<%= " Admin" if current_user.admin? %></a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <%= link_to "Edit you prifle", edit_user_path(current_user), class:"dropdown-item" %>
-            <%= link_to "View your profile",user_path(current_user), class:"dropdown-item" %>
-          </div>
-        </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right ">
-        <li class="nav-item ml-3">
-          <%= link_to 'Log out', logout_path, method: :delete, id:"paths" %>
-        </li>
-      </ul>
-    <% else %>
-      <ul class="nav navbar-nav navbar-right ">
-        <li class="nav-item ml-3">
-          <%= link_to 'Log in', login_path, id:"paths" %>
-        </li>
-      </ul>
-            <ul class="nav navbar-nav navbar-right ">
-        <li class="nav-item ml-3">
-          <%= link_to 'Sign up', signup_path, id:"paths" %>
-        </li>
-      </ul>
-    <% end %>
   </div>
 </nav>

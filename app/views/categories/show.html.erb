@@ -1,6 +1,11 @@
-<h1 class="text-center">Welcome to <%= @category.name %> </h1>
-<div class="row">
-</div>  
-<h4 class="text-center"><%= @category.name %> articles </h4>
+<h1 align="center"> <%= "Category:" +@category.name %></h1>
 
-
+  <div class=" col-3 offset-4 center mt-4">
+    <%= will_paginate(@category_articles, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer, class: 'justify-content-center') %>
+  </div>
+  <div class=" col-8">
+    <%= render 'articles/article', obj: @category_articles %>
+  </div>
+  <div class=" col-3 offset-4 center mt-4">
+    <%= will_paginate(@category_articles, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer, class: 'justify-content-center' ) %>
+  </div>
